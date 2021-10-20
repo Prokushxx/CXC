@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
-
+use App\Models\Student; 
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,9 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-     return view('allstudents');
+
+ $students= Student::paginate(4);
+        return view('allstudents',['students'=>$students]);
 });
 
 Route::resource('Student', StudentController::class);

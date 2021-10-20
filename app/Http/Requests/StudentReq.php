@@ -13,7 +13,7 @@ class StudentReq extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class StudentReq extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email'=>'unique:students,email_addr',
         ];
+    }
+
+    public function messages(){
+      return [
+        'unique'=>'*This email already exists'
+      ];
     }
 }

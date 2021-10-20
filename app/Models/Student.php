@@ -15,7 +15,7 @@ class Student extends Model
       'dob',
       'class',
       'phone_nbr',
-      'email_nbr',
+      'email_addr',
     ];
 
     // public function subject_choices(){

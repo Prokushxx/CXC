@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentReq;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        
+        $students= Student::paginate(4);
+        return view('allstudents',['students'=>$students]);
     }
 
     /**
@@ -33,9 +35,19 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentReq $request)
     {
-        
+        Student::create(
+          [
+            'first_nm'=>$request->fname,
+            'last_nm'=>$request->lname,
+            'dob'=>$request->dob,
+            'phone_nbr'=>$request->phone,
+            'class'=>$request->class,
+            'email_addr'=>$request->email,
+          ]);
+
+          return redirect()->back();
     }
 
     /**
@@ -78,8 +90,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+
+    public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        $student->delete();
+        return redirect()->back();
     }
 }
