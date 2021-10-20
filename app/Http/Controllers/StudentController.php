@@ -67,9 +67,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit(Student $student,$id)
     {
-        
+
+      $student = Student::find($id);
+        return view('studentedit',['student'=>$student]);
     }
 
     /**
@@ -79,9 +81,19 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, Student $student,$id)
     {
-        //
+      $student = Student::find($id);
+      
+          $student->first_nm=$request->fname;
+          $student->last_nm=$request->lname;
+          $student->dob=$request->dob;
+          $student->class=$request->class;
+          $student->phone_nbr=$request->phone;
+          $student->email_addr=$request->email;
+          $student->save();
+        
+        return redirect()->back();
     }
 
     /**
