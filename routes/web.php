@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\SubjectChoiceController;
 use App\Models\Student;
 use App\Models\Subject;
 
@@ -25,3 +26,4 @@ Route::get('/', function () {
 
 Route::resource('Student', StudentController::class);
 Route::resource('Subject', SubjectController::class);
+Route::resource('SubjectChoice', SubjectChoiceController::class);

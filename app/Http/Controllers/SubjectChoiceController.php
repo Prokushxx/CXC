@@ -14,7 +14,9 @@ class SubjectChoiceController extends Controller
      */
     public function index()
     {
-        //
+        $choices = Subject_Choice::with('student','subject')->get()->toArray();
+        dd($choices);
+        return view('choices.index',['choices'=>$choices]);
     }
 
     /**
@@ -44,9 +46,10 @@ class SubjectChoiceController extends Controller
      * @param  \App\Models\Subject_Choice  $subject_Choice
      * @return \Illuminate\Http\Response
      */
-    public function show(Subject_Choice $subject_Choice)
+    public function show($id)
     {
-        //
+        $student = Student::find($id);
+        return view('choices.show',$student->id);
     }
 
     /**
