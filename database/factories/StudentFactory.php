@@ -6,7 +6,7 @@ use App\Models\Model;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StudentfactoryFactory extends Factory
+class StudentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -22,9 +22,16 @@ class StudentfactoryFactory extends Factory
      */
     public function definition()
     {
+      $gender = ['male','female'];
+      
         return [
-            'first_nm'=> $this->faker->name(),
-            'last_nm'=> $this->faker->name(),
+            'first_nm'=> $this->faker->colorName(),
+            'last_nm'=> $this->faker->colorName(),
+            'dob'=>$this->faker->date(),
+            'class'=>$this->faker->year(),
+            'phone_nbr'=>$this->faker->phoneNumber(),
+            'email_addr'=>$this->faker->address(),
+            'gender'=> 'gender',
         ];
     }
 }

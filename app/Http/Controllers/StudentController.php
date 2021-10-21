@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentReq;
 use App\Models\Student;
+use App\Models\Subject;
+use App\Models\Subject_Choice;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -26,7 +28,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-      return view('studentadd');
+      $subjects = Subject::all();
+      return view('studentadd',['subjects'=>$subjects]);
     }
 
     /**
@@ -45,7 +48,13 @@ class StudentController extends Controller
             'phone_nbr'=>$request->phone,
             'class'=>$request->class,
             'email_addr'=>$request->email,
+            'gender'=>$request->gender,
           ]);
+
+          // Subject_Choice::create([
+          //   // 'student_id'=>$student->id,
+          //   'subject_id'=>$request->subject,
+          // ]);
 
           return redirect()->back();
     }
@@ -69,9 +78,9 @@ class StudentController extends Controller
      */
     public function edit(Student $student,$id)
     {
-
+      // $subjects = Subject::all();
       $student = Student::find($id);
-        return view('studentedit',['student'=>$student]);
+        return view('studentedit',compact('student'));
     }
 
     /**
@@ -92,6 +101,12 @@ class StudentController extends Controller
           $student->phone_nbr=$request->phone;
           $student->email_addr=$request->email;
           $student->save();
+
+          // Subject_Choice::Create([
+          //   'student_id'=>$student->id,
+          //   'subject_id'=>$request->subject,
+          //   'year_of_exam'=>$request->,
+          // ]);
         
         return redirect()->back();
     }

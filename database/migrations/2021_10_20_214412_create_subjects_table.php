@@ -4,24 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentsTable extends Migration
+class CreateSubjectsTable extends Migration
 {
     /**
      * Run the migrations.
      *
+     * 
      * @return void
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('first_nm');
-            $table->string('last_nm');
-            $table->date('dob');
-            $table->string('class');
-            $table->string('phone_nbr');
-            $table->string('email_addr')->unique();
-            $table->string('gender');
+            $table->text('subject_nm');
+            $table->integer('cost_amt');
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('subjects');
     }
 }

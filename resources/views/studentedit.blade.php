@@ -77,7 +77,19 @@
         @enderror
       </span> --}}
     </div>
-
+    {{-- <div
+    class="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
+    <div class="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
+        <p>
+            <label for="gender" class="bg-white text-gray-600 px-1">Subject</label>
+        </p>
+    </div>
+    <Select class="py-1 px-1 outline-none block h-full w-full" name="subject" required>
+        @foreach ($subjects as $sub)
+            <option value="{{ $sub->id }}" name="subject">{{ $sub->subject_nm }}</option>
+        @endforeach
+    </Select>
+</div> --}}
   </div>
   <div class="border-t mt-6 pt-3">
     <button class="rounded text-gray-100 px-3 py-1 bg-blue-500 hover:shadow-inner hover:bg-blue-700 transition-all duration-300" type="submit">

@@ -49,6 +49,5 @@
 </div>
 
     <button class="bg-blue-500 py-2 px-3 rounded ml-20 my-4 hover:bg-blue-400"><a href="{{ route('Student.create') }}" class="text-white">Add Student</a></button>
-    {{-- <button class="bg-yellow-500 py-2 px-3 rounded ml-20 my-4 hover:bg-blue-400"><a href="{{ route('Student.edit') }}" class="text-white"> Add Student</a></button> --}}
-    
+    {{-- <button class="bg-yellow-500 py-2 px-3 rounded ml-20 my-4 hover:bg-blue-400"><a href="{{ route('Student.edit') }}" class="text-white"> Add Student</a></button> --}} 
 @endsection

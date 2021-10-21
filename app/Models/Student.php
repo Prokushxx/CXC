@@ -16,20 +16,21 @@ class Student extends Model
       'class',
       'phone_nbr',
       'email_addr',
+      'gender',
     ];
 
-    // public function subject_choices(){
-    //   $this->hasMany(SubjectChoice::class);
-    // }
+    public function subject_choices(){
+     $this->hasMany(SubjectChoice::class,'student_id');
+    }
 
-    // public function transactions(){
-    //   $this->hasMany(Transaction::class);
-    // }
-    // public function payments(){
-    //   $this->hasMany(Transaction::class);
-    // }
+    public function transactions(){
+      $this->hasMany(Transaction::class,'student_id');
+    }
+    public function payments(){
+      $this->hasMany(Transaction::class,'student_id');
+    }
 
-    // public function payment_history(){
-    //   $this->hasMany(Transaction::class);
-    // }
+    public function payment_history(){
+      $this->hasMany(Transaction::class,'student_id');
+    }
 }

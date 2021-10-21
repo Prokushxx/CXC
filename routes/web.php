@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
-use App\Models\Student; 
+use App\Http\Controllers\SubjectController;
+use App\Models\Student;
+use App\Models\Subject;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,4 @@ Route::get('/', function () {
 });
 
 Route::resource('Student', StudentController::class);
+Route::resource('Subject', SubjectController::class);
