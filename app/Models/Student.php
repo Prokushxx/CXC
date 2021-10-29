@@ -21,7 +21,7 @@ class Student extends Model
     ];
 
     public function subject_choices(){
-    return $this->hasMany(Subject_Choice::class,'student_id');
+    return  $this->hasMany(Subject_Choice::class,'student_id','id')->with('student','subject');
     }
 
     public function transactions(){

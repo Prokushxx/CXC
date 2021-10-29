@@ -36,6 +36,7 @@
             @method('DELETE')
             <a href="{{ route('SubjectChoice.show',$student->id) }}" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-400 hover:bg-green-dark">Add Subject</a><br>
             <a href="{{ route('Student.edit',$student->id) }}" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-400 hover:bg-green-dark">Edit</a><br>
+            <a href="{{ route('SubjectChoice.show',$student->id) }}" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-yellow-400 hover:bg-green-dark">Subject</a><br>
             <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red-500 hover:bg-blue-dark" type="submit">DELETE</button>
           </form>
           </td>
@@ -50,5 +51,4 @@
 </div>
 
     <button class="bg-blue-500 py-2 px-3 rounded ml-20 my-4 hover:bg-blue-400"><a href="{{ route('Student.create') }}" class="text-white">Add Student</a></button>
-    {{-- <button class="bg-yellow-500 py-2 px-3 rounded ml-20 my-4 hover:bg-blue-400"><a href="{{ route('Student.edit') }}" class="text-white"> Add Student</a></button> --}} 
 @endsection

@@ -30,7 +30,7 @@ class StudentFactory extends Factory
             'dob'=>$this->faker->date(),
             'class'=>$this->faker->year(),
             'phone_nbr'=>$this->faker->phoneNumber(),
-            'email_addr'=>$this->faker->address(),
+            'email_addr'=>$this->faker->email(),
             'gender'=> 'gender',
         ];
     }
