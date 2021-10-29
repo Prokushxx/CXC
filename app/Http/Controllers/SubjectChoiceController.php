@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subject;
+use App\Models\Student;
 use App\Models\Subject_Choice;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class SubjectChoiceController extends Controller
@@ -15,7 +18,7 @@ class SubjectChoiceController extends Controller
     public function index()
     {
         $choices = Subject_Choice::with('student','subject')->get()->toArray();
-        dd($choices);
+        // dd($choices);
         return view('choices.index',['choices'=>$choices]);
     }
 
@@ -24,9 +27,11 @@ class SubjectChoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+      // $student = Student::find($id);
+      // $subjects = Subject::all();
+      // return view('choices.show',['subjects'=>$subjects]);
     }
 
     /**
@@ -37,7 +42,13 @@ class SubjectChoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Subject_Choice::create([
+          'student_id'=> $request->id,
+          'subject_id'=> $request->subject,
+          'year_of_exam'=> $request->year,
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -48,8 +59,11 @@ class SubjectChoiceController extends Controller
      */
     public function show($id)
     {
-        $student = Student::find($id);
-        return view('choices.show',$student->id);
+      $total =  DB::table('subject_choices')->join('subjects','subjects.id','=','subject_choices.subject_id')->where('student_id',$id)->sum('cost_amt');
+      $student = Subject_Choice::with('student','subject')->where('student_id',$id)->get();
+      $name =  Student::with('subject_choices')->where('id',$id)->get()->toArray();
+      $subjects = Subject::all();
+      return view('choices.show',compact('name','subjects','student','total'));
     }
 
     /**
