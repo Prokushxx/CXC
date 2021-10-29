@@ -9,7 +9,11 @@ class Subject_Choice extends Model
 {
     use HasFactory;
 
+    public $table = 'subject_choices';
+
     protected $fillable = [
+      'student_id',
+      'subject_id',
       'status',
       'year_of_exam',
     ];
@@ -19,6 +23,6 @@ class Subject_Choice extends Model
     }
 
     public function subject(){
-      return $this->belongsTo(Student::class,'subject_id');
+      return $this->belongsTo(Subject::class,'subject_id');
     }
 }

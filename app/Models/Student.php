@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+    
 
     protected $fillable = [
       'first_nm',
@@ -20,17 +21,17 @@ class Student extends Model
     ];
 
     public function subject_choices(){
-     $this->hasMany(SubjectChoice::class,'student_id');
+    return $this->hasMany(Subject_Choice::class,'student_id');
     }
 
     public function transactions(){
-      $this->hasMany(Transaction::class,'student_id');
+    return $this->hasMany(Transaction::class,'student_id');
     }
     public function payments(){
-      $this->hasMany(Transaction::class,'student_id');
+     return $this->hasMany(Transaction::class,'student_id');
     }
 
     public function payment_history(){
-      $this->hasMany(Transaction::class,'student_id');
+     return $this->hasMany(Transaction::class,'student_id');
     }
 }

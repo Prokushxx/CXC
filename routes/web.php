@@ -19,7 +19,6 @@ use App\Models\Subject;
 */
 
 Route::get('/', function () {
-
  $students= Student::paginate(4);
         return view('allstudents',['students'=>$students]);
 });

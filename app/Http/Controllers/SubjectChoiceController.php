@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subject;
+use App\Models\Student;
 use App\Models\Subject_Choice;
 use Illuminate\Http\Request;
 
@@ -37,7 +39,7 @@ class SubjectChoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -48,8 +50,10 @@ class SubjectChoiceController extends Controller
      */
     public function show($id)
     {
-        $student = Student::find($id);
-        return view('choices.show',$student->id);
+        $student = Subject_Choice::with('student','subject')->where('id',$id)->get()->toArray();
+        // dd($student);  
+        $subjects= Subject::all();
+        return view('choices.show',compact('student','subjects'));
     }
 
     /**
