@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students','id');
+            $table->foreignId('student_id')->constrained('students','id')->onDelete('cascade');
             $table->integer('amount_due');
             $table->integer('amount_paid');
             $table->integer('balance_amt');

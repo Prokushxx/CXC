@@ -17,7 +17,7 @@ class SubjectChoiceController extends Controller
      */
     public function index()
     {
-        $choices = Subject_Choice::with('student','subject')->get()->toArray();
+        $choices = Subject_Choice::with('student','subject')->paginate(6);
         // dd($choices);
         return view('choices.index',['choices'=>$choices]);
     }
@@ -60,10 +60,11 @@ class SubjectChoiceController extends Controller
     public function show($id)
     {
       $total =  DB::table('subject_choices')->join('subjects','subjects.id','=','subject_choices.subject_id')->where('student_id',$id)->sum('cost_amt');
-      $student = Subject_Choice::with('student','subject')->where('student_id',$id)->get();
+      $student = Subject_Choice::with('student','subject')->where('student_id',$id)->paginate(4);
+      $sub = Subject_Choice::where('id',$id)->get();
       $name =  Student::with('subject_choices')->where('id',$id)->get()->toArray();
       $subjects = Subject::all();
-      return view('choices.show',compact('name','subjects','student','total'));
+      return view('choices.show',compact('name','subjects','student','total','sub'));
     }
 
     /**
@@ -95,8 +96,11 @@ class SubjectChoiceController extends Controller
      * @param  \App\Models\Subject_Choice  $subject_Choice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject_Choice $subject_Choice)
+    public function destroy($id)
     {
-        //
-    }
+      $sub = Subject_Choice::where('id',$id)->get();
+      // dd($sub);
+        $sub->delete();
+        return redirect()->back();
+      }
 }

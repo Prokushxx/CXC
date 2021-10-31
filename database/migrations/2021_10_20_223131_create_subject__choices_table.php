@@ -1,4 +1,4 @@
-<?php
+{{ ($stud->subject->subject_nm) }}<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,8 +15,8 @@ class CreateSubjectChoicesTable extends Migration
     {
         Schema::create('subject_choices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students','id');
-            $table->foreignId('subject_id')->constrained('subjects','id');
+            $table->foreignId('student_id')->constrained('students','id')->onDelete('cascade');
+            $table->foreignId('subject_id')->constrained('subjects','id')->onDelete('cascade');
             $table->boolean('status')->default(1);
             $table->date('year_of_exam');
             $table->timestamps();

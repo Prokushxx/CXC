@@ -15,7 +15,7 @@ class CreatePaymentHistoriesTable extends Migration
     {
         Schema::create('payment_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students','id');
+            $table->foreignId('student_id')->constrained('students','id')->onDelete('cascade');
             $table->integer('amount_paid');
             $table->date('date_paid');
             $table->longText('description');
