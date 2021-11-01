@@ -66,8 +66,9 @@ class SubjectChoiceController extends Controller
       $subjects = Subject::all();
       $sub = Subject_Choice::where('id',$id)->get();
       $payment = Payment::where('student_id',$id)->sum('amount_paid');
-      // dd($payment);
-      return view('choices.show',compact('name','sub','subjects','student','total','payment'));
+      $payments = Payment::where('student_id',$id)->get()->toArray();
+      // dd($payments);
+      return view('choices.show',compact('name','sub','subjects','student','total','payment','payments'));
     }
 
     /**

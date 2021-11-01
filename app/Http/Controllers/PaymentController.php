@@ -39,6 +39,8 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+        $pay = $request->payment;
+        $total = $request->total;
 
         Payment::create([
           'student_id'=>$request->StudentId,
@@ -46,6 +48,7 @@ class PaymentController extends Controller
           'amount_paid'=>$request->amount,
           'balance_amt'=>$request->balance_amt,
         ]);
+
         Transaction::create([
           'student_id'=>$request->StudentId,
           'amount_due'=>$request->Total,
@@ -54,14 +57,14 @@ class PaymentController extends Controller
           'year_of_exam'=>$request->date,
         ]);
 
-        if($request->payment == $request->total){
+
         Payment_History::create([
           'student_id'=>$request->StudentId,
           'amount_paid'=>$request->payment,
           'date_paid'=>$request->date,
           'description'=>'Testing my work',
         ]);
-      }
+      
         return redirect()->back();
     }
 
@@ -73,7 +76,7 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
-        //
+       
     }
 
     /**

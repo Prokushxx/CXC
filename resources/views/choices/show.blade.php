@@ -94,8 +94,11 @@
                                         class="text-grey-lighter font-bold py-1 px-3 rounded text-white text-xs bg-red-600 hover:bg-red-700">Delete</button><br>
                                 </form>
                                 <button class="bg-green-600 text-white py-1 px-3 hover:bg-green-400 rounded text-xs">
-                                  <h1 id="pay-btn">Make Pay</h1>
+                                  <h1 id="pay-btn"> Make Pay </h1>
                               </button>
+                                {{-- <button class="bg-green-600 text-white py-1 px-3 hover:bg-green-400 rounded text-xs">
+                                  <h1 id="pay-btn"><a href="{{ route('Payment.show',$name[0]['subject_choices'][0]['id']) }}"> Make Pay </a></h1>
+                              </button> --}}
                             </td>
                             
                     @endforeach
@@ -137,7 +140,7 @@
                             <h4>$ {{ $total - $payment }}</h4>
               
                             @elseif ($payment === $total)
-                              <h4>{{ PAID }}</h4>
+                              <h4> PAID </h4>
                             @endif
                         </td>
                     </tr>
@@ -170,12 +173,13 @@
                         <input type="hidden" value="{{ $name[0]['id'] }}" name="StudentId">
                         <input type="hidden" value="{{ $sub->id }}" name="SubjectId">
                         <input type="hidden" value="{{ $total }}" name="Total">
-                        <input type="hidden" value="{{ $student[0]['year_of_exam'] }}" name="date">
                         <input type="hidden" value="{{ $payment }}" name="payment">
                         <input type="hidden" value="{{ $total - $payment }}" name="balance_amt">
                         <input type="number" class="mt-6 px-2 py-1 text-black w-full" name="amount" placeholder="$USD"
-                            required>
- {{-- {{ dd($student[0]['year_of_exam']) }} --}}
+                        required>
+                        @foreach ($student as $stud)
+                        <input type="hidden" value="{{ $stud->year_of_exam }}" name="date">
+                            @endforeach
                 </div>
                 <div class="mt-3 flex justify-end space-x-3">
                     {{-- <button class="px-3 py-1 bg-red-500 rounded text-white hover:bg-red-700">Cancel</button> --}}
