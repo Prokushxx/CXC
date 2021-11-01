@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -26,3 +27,4 @@ Route::get('/', function () {
 Route::resource('Student', StudentController::class);
 Route::resource('Subject', SubjectController::class);
 Route::resource('SubjectChoice', SubjectChoiceController::class);
+Route::resource('Payment',PaymentController::class);  

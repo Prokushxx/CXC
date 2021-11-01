@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Models\Subject;
 use App\Models\Student;
 use App\Models\Subject_Choice;
@@ -61,10 +62,12 @@ class SubjectChoiceController extends Controller
     {
       $total =  DB::table('subject_choices')->join('subjects','subjects.id','=','subject_choices.subject_id')->where('student_id',$id)->sum('cost_amt');
       $student = Subject_Choice::with('student','subject')->where('student_id',$id)->paginate(4);
-      $sub = Subject_Choice::where('id',$id)->get();
       $name =  Student::with('subject_choices')->where('id',$id)->get()->toArray();
       $subjects = Subject::all();
-      return view('choices.show',compact('name','subjects','student','total','sub'));
+      $sub = Subject_Choice::where('id',$id)->get();
+      $payment = Payment::where('student_id',$id)->sum('amount_paid');
+      // dd($payment);
+      return view('choices.show',compact('name','sub','subjects','student','total','payment'));
     }
 
     /**
@@ -98,7 +101,8 @@ class SubjectChoiceController extends Controller
      */
     public function destroy($id)
     {
-      $sub = Subject_Choice::where('id',$id)->get();
+      // dd($id);
+      $sub = Subject_Choice::find($id);
       // dd($sub);
         $sub->delete();
         return redirect()->back();

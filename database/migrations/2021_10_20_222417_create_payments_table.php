@@ -19,8 +19,8 @@ class CreatePaymentsTable extends Migration
             $table->foreignId('subject_id')->constrained('subjects','id')->onDelete('cascade');
             $table->integer('amount_paid');
             $table->integer('balance_amt');
-            $table->date('date_paid');
-            $table->timestamps();
+            $table->timestamp('date_paid');
+            // $table->timestamps();
         });
     }
 

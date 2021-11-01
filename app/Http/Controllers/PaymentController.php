@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Payment_History;
+use App\Models\Transaction;
+use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class PaymentController extends Controller
 {
@@ -35,7 +39,30 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Payment::create([
+          'student_id'=>$request->StudentId,
+          'subject_id'=>$request->SubjectId,
+          'amount_paid'=>$request->amount,
+          'balance_amt'=>$request->balance_amt,
+        ]);
+        Transaction::create([
+          'student_id'=>$request->StudentId,
+          'amount_due'=>$request->Total,
+          'amount_paid'=>$request->payment,
+          'balance_amt'=>$request->balance_amt,
+          'year_of_exam'=>$request->date,
+        ]);
+
+        if($request->payment == $request->total){
+        Payment_History::create([
+          'student_id'=>$request->StudentId,
+          'amount_paid'=>$request->payment,
+          'date_paid'=>$request->date,
+          'description'=>'Testing my work',
+        ]);
+      }
+        return redirect()->back();
     }
 
     /**
@@ -69,7 +96,7 @@ class PaymentController extends Controller
      */
     public function update(Request $request, Payment $payment)
     {
-        //
+        
     }
 
     /**
